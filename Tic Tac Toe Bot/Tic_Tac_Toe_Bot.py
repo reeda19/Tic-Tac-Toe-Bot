@@ -1,4 +1,4 @@
-def check_for_two():
+def check_for_two(x, o):
     for r in range (3):
         count_row = 0
         count_column = 0
@@ -7,15 +7,15 @@ def check_for_two():
         vacancy_row=None
         vacancy_col=None
         for c in range(3):
-            if elements[r][c]=='X':
+            if elements[r][c]==x:
                 count_row+=1
-            elif elements[r][c]=='O':
+            elif elements[r][c]==o:
                 row_x = True
             else:
                 vacancy_row=[r, c]
-            if elements[c][r]=='X':
+            if elements[c][r]==x:
                 count_column+=1
-            elif elements[c][r]=='O':
+            elif elements[c][r]==o:
                 col_x = True
             else:
                 vacancy_col=[c, r]
@@ -28,7 +28,14 @@ def check_for_two():
 
 
 def computer_move():
-    two = check_for_two()
+    win = check_for_two('O','X')
+    if not win == None:
+        elements[win[0]][win[1]] = 'O'
+        return
+    elif elements[1][1] == ' ':
+        elements[1][1] = 'O'
+        return
+    two = check_for_two('X','O')
     if not two == None:
         elements[two[0]][two[1]] = 'O'
         return
