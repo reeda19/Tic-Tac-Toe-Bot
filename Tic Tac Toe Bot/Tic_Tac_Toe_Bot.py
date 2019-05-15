@@ -25,10 +25,20 @@ def check_for_two(x, o):
             return vacancy_row
     return None
 
-
-
+def check_corners():
+    if(elements[0][0]=='X' and elements[2][2]=='X') or (elements[0][2]=='X' and elements[2][0]=='X'):
+        if elements[0][1]==' ':
+            return [0, 1]
+        elif elements[1][0]==' ':
+            return [1, 0]
+        elif elements[1][2]==' ':
+            return [1, 2]
+        elif elements[2][1]==' ':
+            return [2, 1]
+    return None
 def computer_move():
     win = check_for_two('O','X')
+    corners = check_corners()
     if not win == None:
         elements[win[0]][win[1]] = 'O'
         return
@@ -42,6 +52,8 @@ def computer_move():
     elif elements[1][1] == ' ':
         elements[1][1] = 'O'
         return
+    if not check_corners == None:
+        elements[corners[0]][corners[1]] = 'O'
 
 elements = [[' ', ' ', ' '],[' ', ' ', ' '], [' ', ' ', ' ']]
 while True:
