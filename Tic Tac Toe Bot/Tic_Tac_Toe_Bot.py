@@ -1,6 +1,6 @@
 import sys
+did_win = False
 def check_for_two(x, o):
-
      #checking rows
     for i in range (0, 7, 3):
         count_row = 0
@@ -51,23 +51,21 @@ def computer_move():
     win = check_for_two('O','X')
     corners = check_corners()
     if win>=0:
-        elements[win] = 'O'
-        #print('win')
-        return
+       elements[win] = 'O'
+       global did_win
+       did_win = True
+       return
     elif elements[4] == ' ':
         elements[4] = 'O'
         return
     two = check_for_two('X','O')
     if two>=0:
         elements[two] = 'O'
-        #print('two')
         return
     if corners>=0:
         elements[corners] = 'O'
-        #print('corners')
         return
     elements[go_random()] = 'O'
-    #print('random')
     return
 
 elements = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
@@ -81,6 +79,10 @@ while True:
      |   |
      """).format(elements[0],elements[1],elements[2],elements[3],elements[4],elements[5],elements[6],elements[7],elements[8])
     print(grid)
+
+    if did_win:
+        print("Computer has won!")
+        exit(0)
     while True:
         try:
             user_input=int(input('Where would you like to go: '))
